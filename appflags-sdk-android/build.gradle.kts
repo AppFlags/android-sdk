@@ -2,9 +2,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     `maven-publish`
+    signing
 }
-
-version = "1.0-SNAPSHOT"
 
 android {
     namespace = "io.appflags.android"
@@ -56,8 +55,43 @@ publishing {
 
             afterEvaluate { from(components["release"]) }
 
+            pom {
+                name.set("AppFlags Android SDK")
+                description.set("Android SDK for AppFlags")
+                url.set("https://appflags.io/")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://www.opensource.org/licenses/mit-license.php")
+                    }
+                }
+                developers {
+                    developer {
+                        name.set("AppFlags")
+                        email.set("support@appflags.io")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://gitlab.com/app-flags/sdks/appflags-sdk-android.git")
+                    developerConnection.set("scm:git:https://gitlab.com/app-flags/sdks/appflags-sdk-android.git")
+                    url.set("https://appflags.io/")
+                }
+            }
+
         }
     }
+}
+
+signing {
+    val signingKeyId = System.getenv("GPG_KEY_NAME")?.takeLast(8) // signing plugin wants last 8 chars of key name
+    val signingKey = System.getenv("GPG_PRIVATE_KEY")
+    val signingPassword = System.getenv("GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    setRequired {
+        // signing is only required for publishing to Maven Central
+        gradle.taskGraph.allTasks.any { it.name == "publishToSonatype" }
+    }
+    sign(publishing.publications)
 }
 
 dependencies {
