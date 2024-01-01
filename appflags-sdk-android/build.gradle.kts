@@ -99,8 +99,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.squareup.okhttp3:okhttp-sse:4.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp-sse:4.12.0")
     implementation("io.appflags:appflags-java-protobuf-types:1.1.0")
 
     testImplementation("junit:junit:4.13.2")
