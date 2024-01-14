@@ -74,7 +74,7 @@ publishing {
                 scm {
                     connection.set("scm:git:https://gitlab.com/app-flags/sdks/appflags-sdk-android.git")
                     developerConnection.set("scm:git:https://gitlab.com/app-flags/sdks/appflags-sdk-android.git")
-                    url.set("https://appflags.io/")
+                    url.set("https://github.com/AppFlags/android-sdk")
                 }
             }
 
